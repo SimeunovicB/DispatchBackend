@@ -9,10 +9,12 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import os.path
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+import django_heroku
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -25,7 +27,7 @@ SECRET_KEY = 'django-insecure-kg$tmwbr(e037_p1fc#@fbrcfom%=m!=)&ikug=j)h_&fv56ob
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['readMailsBackend.herokuapp.com']
 
 CORS_ORIGIN_ALLOW_ALL = True #zastareli
 
@@ -109,11 +111,11 @@ WSGI_APPLICATION = 'readMailsBackend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'test2',
-        'USER': 'postgres',
-        'PASSWORD': '1111',
-        'HOST': 'localhost'
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd5d92f7ciob04l',
+        'USER': 'wyvfveqigkqozj',
+        'PASSWORD': '8e826f18853baaa1c58f76148627069b3c7f53803732b5b60b410601ce193a15',
+        'HOST': 'ec2-34-250-19-18.eu-west-1.compute.amazonaws.com'
     }
 }
 
@@ -154,7 +156,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
+# STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATIC_URL = "/static/"
+
+django_heroku.settings(locals())
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

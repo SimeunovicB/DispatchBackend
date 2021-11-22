@@ -235,7 +235,7 @@ class ReadMailsView(APIView):  # polling, celery, orm - serializer mapira na baz
         print("starting...")
 
         try:
-            rt = RepeatedTimer(10, get_inbox)
+            rt = RepeatedTimer(2, get_inbox)
             print("FUNCTIONALITY ", rt.function)
         except EOFError as e:
             print(e)
